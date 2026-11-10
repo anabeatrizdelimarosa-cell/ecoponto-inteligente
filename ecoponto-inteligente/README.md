@@ -1,56 +1,66 @@
 # EcoPonto Inteligente ♻️
 
-MVP web responsivo para orientar o descarte, consultar pontos de coleta, registrar entregas e acompanhar indicadores.
+Plataforma web/mobile desenvolvida para gestão, rastreabilidade e incentivo à coleta seletiva de resíduos recicláveis em Rondônia.
 
-## Tecnologias
-- Frontend: React, TypeScript, Vite e CSS.
-- Backend: Node.js, TypeScript e Express (API REST).
-- Banco: PostgreSQL.
-- Autenticação: JWT e hash de senha com bcrypt.
+## 📹 Vídeo Pitch
+- **Assista ao vídeo pitch do projeto:** [https://youtube.com/shorts/jQ7sv5xjBv8](https://youtube.com/shorts/jQ7sv5xjBv8)
 
-## Funcionalidades implementadas
-- Cadastro e login de usuários.
-- Consulta de materiais e orientações de descarte.
-- Consulta de pontos ativos e filtro por material.
-- Registro de entrega com validação de campos e compatibilidade entre ponto/material.
-- Histórico individual de entregas.
-- Indicadores de quantidade e entregas.
-- Estrutura de rotas administrativas para cadastro de materiais e pontos e consulta geral de entregas.
+---
 
-> A integração com sensores IoT não faz parte deste MVP, conforme a especificação inicial. O cadastro inicial de materiais é ilustrativo; pontos reais devem ser cadastrados por um administrador autorizado.
+## 🛠️ Stack Tecnológica
 
-## Requisitos
-Node.js 20 ou superior e Docker Desktop (ou PostgreSQL instalado).
+* **Frontend:** React 19, TypeScript, Vite, Tailwind CSS e Lucide React.
+* **Backend:** Node.js, TypeScript e Express (API REST).
+* **Banco de Dados:** PostgreSQL com suporte a armazenamento local no frontend via `localStorage` para o MVP.
+* **Autenticação:** Sistema de perfis (Cidadão, Cooperativa, Escola, SEMA) com hash de senha e sessão.
 
-## Como executar
-1. Abra a pasta do projeto no terminal.
-2. Inicie o PostgreSQL: `docker compose up -d db`.
-3. Copie `server/.env.example` para `server/.env`.
-4. Na raiz, instale as dependências: `npm install`, `npm install --prefix server` e `npm install --prefix client`.
-5. Inicie os dois serviços: `npm run dev`.
-6. Acesse `http://localhost:5173`.
+---
 
-A API fica em `http://localhost:3333/api` e o endpoint de teste é `/api/health`.
+## ✨ Funcionalidades Implementadas
 
-## Primeiro administrador
-Por segurança, o cadastro público cria contas comuns. Para promover uma conta a administrador, execute no PostgreSQL, substituindo o e-mail:
+* **Mapa Interativo & Geolocalização:** Destaque para ecopontos da rede e identificação dos locais onde o usuário já descartou resíduos.
+* **Rede de Ecopontos e Cooperativas:** Card dinâmico de pontos credenciados (SEMA Porto Velho, CATANORTE, ASPREVEL, EEEFM Carmela Dutra e SEMAM Ji-Paraná) com telemetria de sensores IoT.
+* **Histórico & Comprovantes Digitais:** Emissão de certificado com QR Code auditável (ex: `ECO-RO-2026-001`).
+* **Registro de Despacho:** Cálculo automático de Pontos Verdes (+10 pts/kg), pegada de CO₂ evitada e renda estimada para catadores.
+* **Painel Administrativo Governamental (SEMA):** Controle de acessos, simulador de sensores IoT ultrassônicos, edição de parâmetros de CO₂/preços de recicláveis e exportação de relatórios em CSV e JSON.
+* **Guia Oficial de Descarte:** Orientações padronizadas de separação de recicláveis no padrão CONAMA.
+* **Indicadores Socioambientais & Campanhas:** Métricas estaduais integradas e acompanhamento da Gincana Sustentável escolar.
 
-```sql
-UPDATE usuarios SET tipo = 'admin' WHERE email = 'seu-email@exemplo.com';
-```
+---
 
-Depois, saia e entre novamente para atualizar o token. O administrador pode usar as rotas `POST /api/pontos` e `POST /api/materiais` com token Bearer. O corpo de cadastro de ponto aceita `nome`, `descricao`, `endereco`, `latitude`, `longitude`, `capacidade` e `materiais` (lista de IDs de materiais).
+## 📋 Requisitos
 
-## Publicar no GitHub
-Crie um repositório vazio no GitHub chamado `ecoponto-inteligente`. Na pasta do projeto, execute:
+* Node.js 20 ou superior
+* Docker Desktop (opcional, para PostgreSQL via container)
 
-```bash
-git init
-git add .
-git commit -m "Cria MVP do EcoPonto Inteligente"
-git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/ecoponto-inteligente.git
-git push -u origin main
-```
+---
+
+## 🚀 Como Executar Localmente
+
+<Steps>
+  <Step title="Clonar o Repositório" subtitle="Terminal">
+    ```bash
+    git clone [https://github.com/anabeatrizdelimarosa-cell/ecoponto-inteligente.git](https://github.com/anabeatrizdelimarosa-cell/ecoponto-inteligente.git)
+    cd ecoponto-inteligente
+    ```
+    *Verification:* A pasta atual no terminal deve ser a raiz do projeto `ecoponto-inteligente`.
+  </Step>
+  <Step title="Instalar Dependências" subtitle="NPM">
+    Instale as dependências da raiz e dos módulos:
+    ```bash
+    npm install
+    npm install --prefix server
+    npm install --prefix client
+    ```
+    *Verification:* A pasta `node_modules` será criada dentro da raiz, de `client` e de `server`.
+  </Step>
+  <Step title="Iniciar a Aplicação" subtitle="Porta 3011">
+    Execute o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
+    *Verification:* Acesse `http://localhost:3011` no seu navegador para visualizar a plataforma rodando.
+  </Step>
+</Steps>
 
 Não envie arquivos `.env`, senhas ou chaves secretas ao GitHub.
