@@ -86,4 +86,4 @@ app.get('/api/admin/entregas', auth, admin, async (_req, res) => {
 });
 
 const port = Number(process.env.PORT || 3333);
-app.listen(port, () => console.log(`EcoPonto API em http://localhost:${port}`));
+app.listen(port, () => console.log(`EcoPonto API em http://localhost:${port}`));() => console.log(`EcoPonto API em http://localhost:${port}`));
